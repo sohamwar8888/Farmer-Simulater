@@ -1,0 +1,837 @@
+<html>
+<head>
+<title>Farmer Simulator</title>
+</head>
+
+<style type="text/css">
+body{
+font-family : Arial;
+/*background-image : url("/storage/emulated/0/download.jpeg");*/
+background-color : rgb(0,150,997);
+}
+#home div{
+border : 3px solid black;
+display : inline-block;
+background-color : #00FFF0;
+}
+#home{
+border : 3px solid black;
+background-color : rgb(200,78,97);
+color : black;
+width : 180px;
+height : 440px;
+top : 50;
+left : 50;
+}
+#market{
+border : 3px solid black;
+width : 190px;
+height : 400px;
+background-color : rgb(150,0,250);
+}
+#market button{
+display : inline;
+background-color : rgb(90,69,300);
+}
+
+#shop{
+border : 3px solid black;
+background-color : rgb(10,099,20);
+position : relative;
+top : 0;
+left : 800;
+}
+#shop table{
+color : black;
+background-color : hsla(120,50%,67%,0.5);
+}
+
+#bank div{
+display : inline-block;
+border : 3px solid black;
+background-color : rgb(0,0,999);
+}
+#bank{
+border : 3px solid black;
+background-color : slategray;
+}
+
+#smallField{
+border : 3px solid black;
+background-color : rgb(256,150,50);
+}
+
+#smallFieldSecond{
+width : 100%;
+height :100%;
+background-color : blue;
+background-image : url("/Html/ops.png");
+}
+
+#secondSmallField{
+background-image : url("/Html/ops.png");
+}
+</style>
+
+
+
+<body>
+
+<div id="home">
+Money -  <div id="moneyBar"></div><br>
+Eggs -  <div id="eggsBar"></div>
+<button id="eggCollect" onclick="collectEgg()">Collect</button>
+<div id="eggSecondBar"></div><br>
+Wool -  kg<div id="woolBar"></div>
+<button id="woolCollect" onclick="collectWool()">Collect</button>
+<div id="woolSecondBar"></div><br>
+Milk -  l<div id="milkBar"></div>
+<button id="milkCollect" onclick="collectMilk()">Collect</button>
+<div id="milkSecondBar" onload="collectMilk()"></div><br>
+Wheat -  <div id="wheatBar"></div><br>
+Rice -  <div id="riceBar"></div><br>
+Tomato -  <div id="tomatoBar"></div><br>
+Onion -  <div id="onionBar"></div><br>
+Apple -  <div id="appleBar"></div><br>
+Banana -  <div id="bananaBar"></div><br>
+Rice Seeds -  <div id="riceSeedBar"></div><br>
+Wheat Seeds -  <div id="wheatSeedBar"></div><br>
+Apple Seeds -  <div id="appleSeedBar"></div><br>
+Banana Seeds -  <div id="bananaSeedBar"></div><br>
+Tomato Seeds -  <div id="tomatoSeedBar"></div><br>
+Onion Seeds -  <div id="onionSeedBar"></div><br>
+</div>
+
+<div id="market">
+Onion - 100? per kg <button id="" onclick="onionSell()">Sell 1 kg</button><br>
+Tomato - 70? per kg <button id="" onclick="tomatoSell()">Sell 1 kg</button><br>
+Wheat - 30? per kg <button id="" onclick="wheatSell()">Sell 1 kg</button><br>
+Rice - 50? per kg <button id="" onclick="riceSell()">Sell 1 kg</button><br>
+Apple - 30? per kg <button id="" onclick="appleSell()">Sell 1 kg</button><br>
+Banana - 20? per dz <button id="" onclick="bananaSell()">Sell 1 dz</button><br>
+Eggs - 5? per egg <button id="" onclick="eggSell()">Sell 1 egg</button><br>
+Wool - 20? per kg <button id="" onclick="woolSell()">Sell 1 kg</button><br>
+Milk - 20? per l <button id="" onclick="milkSell()">Sell 1 l</button><br>
+
+</div>
+
+<div id="shop">
+<table border="3px" cellspacing="4px" cellborder="3px">
+<tr>
+<td>Onion Seeds- 50? <button onclick="buyOnionSeed()">Buy 1 kg</button></td>
+<td>Onion- 100? <button onclick="buyOnion()">Buy 1 kg</button></td>
+</tr>
+
+<tr>
+<td>Tomato Seeds- 25? <button onclick="buyTomatoSeed()">Buy 1 kg</button></td>
+<td>Tomato - 70? <button onclick="buyTomato()">Buy 1 kg</button></td>
+</tr>
+
+<tr>
+<td>Wheat Seeds- 10? <button onclick="buyWheatSeed()">Buy 1 kg</button></td>
+<td>Wheat - 30? <button onclick="buyWheat()">Buy 1 kg</button></td>
+</tr>
+
+<tr>
+<td>Rice Seeds- 10? <button onclick="buyRiceSeed()">Buy 1 kg</button></td>
+<td>Rice - 50? <button onclick="buyRice()">Buy 1 kg</button></td>
+</tr>
+
+<tr>
+<td>Apple Seeds - 10? <button onclick="buyAppleSeed()">Buy 1 kg</button></td>
+<td>Apple - 30? <button onclick="buyApple()">Buy 1 kg</button></td>
+</tr>
+
+<tr>
+<td>Banana Seeds- 10? <button onclick="buyBananaSeed()">Buy 1 kg</button></td>
+<td>Banana - 20? <button onclick="buyBanana()">Buy 1 kg</button></td>
+</tr>
+
+<tr>
+<td>Eggs - 5? <button onclick="buyEgg()">Buy 1 kg</button></td>
+<td>Wool- 20? <button onclick="buyWool()">Buy 1 kg</button></td>
+</tr>
+</table>
+</div>
+
+<div id="bank">
+<table border="3px" cellspacing="3px" cellpadding="3px"> 
+<tr>
+<td>Your Money - <div id="moneyBar2"></div></td>
+
+<td>Your Bank Money - <div id="bankMoneyBar"></div></td>
+</tr><tr>
+<td><button onclick="send100()">Store 100</button></td>
+<td><button onclick="get100()">Withdraw 100</button></td>
+</tr>
+
+<tr>
+<td><button onclick="send1000()">Store 1000</button></td>
+<td><button onclick="get1000()">Withdraw 1000</button></td>
+</tr>
+
+<tr>
+<td><button onclick="send10000()">Store 10000</button></td>
+<td><button onclick="get10000()">Withdraw 10000</button></td>
+</tr>
+
+
+
+
+</table>
+
+
+</div>
+
+<div id="smallField">
+
+<table border="3px" cellspacing="3px" cellpadding="3px">
+
+<tr>
+
+<td><div id="smallFieldImg"></div></td>
+
+<td>
+<button onclick="smallFieldOnion()">Onion</button>
+<button onclick="smallFieldTomato()">Tomato</button><br>
+<button onclick="smallFieldWheat()">Wheat</button>
+<button onclick="smallFieldRice()">Rice</button><br>
+</td>
+<td id="secondSmallField">
+
+<div id="smallFieldSecond"></div>
+
+
+</td>
+</tr>
+
+
+
+
+
+</table>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var money = 200;
+var bankMoney = 50000;
+var eggs = 5;
+var wool = 10;
+var milk = 10
+var apple = 20;
+var banana = 5;
+var tomato = 5;
+var onion = 5;
+var appleSeed = 0;
+var bananaSeed = 0;
+var rice = 10;
+var wheat = 10;
+var riceSeed = 0;
+var wheatSeed = 0;
+var tomatoSeed = 0;
+var onionSeed = 0;
+</script>
+
+<script type="text/javascript">
+function setValue(){
+document.getElementById("moneyBar").innerText = money;
+document.getElementById("eggsBar").innerText = eggs;
+document.getElementById("woolBar").innerText = wool;
+document.getElementById("milkBar").innerText = milk;
+document.getElementById("wheatBar").innerText = wheat;
+document.getElementById("riceBar").innerText = rice;
+document.getElementById("tomatoBar").innerText = tomato;
+document.getElementById("onionBar").innerText = onion;
+document.getElementById("appleBar").innerText = apple;
+document.getElementById("bananaBar").innerText = banana;
+document.getElementById("riceSeedBar").innerText = riceSeed;
+document.getElementById("wheatSeedBar").innerText = wheatSeed;
+document.getElementById("tomatoSeedBar").innerText = tomatoSeed;
+document.getElementById("onionSeedBar").innerText = onionSeed;
+document.getElementById("bananaSeedBar").innerText = bananaSeed;
+document.getElementById("appleSeedBar").innerText = appleSeed;
+document.getElementById("bankMoneyBar").innerText = bankMoney;
+document.getElementById("moneyBar2").innerText = money;
+}
+
+var milkSecondBar = document.getElementById("milkSecondBar");
+var woolSecondBar = document.getElementById("woolSecondBar");
+var eggSecondBar = document.getElementById("eggSecondBar");
+
+setValue();
+
+var milkSecond = 20;
+var woolSecond = 20;
+var eggSecond = 20;
+
+function collectMilk(){
+var milkTime = setInterval(function(){ 
+if(milkSecond==0){
+milkSecond = 20;
+milk = milk+1;
+setValue();
+milkSecondBar.innerText = null;
+clearInterval(milkTime);
+collectMilk();
+return;
+}else{
+milkSecondBar.innerText = milkSecond;
+milkSecond--;
+}
+}, 1000);
+
+}
+function collectWool(){
+
+var woolTime = setInterval(function(){ 
+if(woolSecond==0){
+woolSecond=20;
+wool = wool + 1;
+setValue();
+woolSecondBar.innerText = null;
+clearInterval(woolTime);
+collectWool();
+return;
+}else{
+woolSecondBar.innerText = woolSecond;
+woolSecond--;
+}
+}, 1000);
+
+}
+function collectEgg(){
+var eggTime = setInterval(function(){ 
+if(eggSecond==0){
+eggSecond=20;
+eggs = eggs + 1;
+setValue();
+eggSecondBar.innerText = null;
+clearInterval(eggTime);
+collectEgg();
+return;
+}else{
+eggSecondBar.innerText = eggSecond;
+eggSecond--;
+}
+}, 1000);
+
+}
+</script>
+
+<script type="text/javascript">
+
+function onionSell(){
+if(onion>0){
+onion = onion-1;
+money = money+100;
+setValue();
+}else if(onion<=0){
+alert("Not Sufficient Onions");
+setValue();
+}
+}
+
+function tomatoSell(){
+if(tomato>0){
+tomato = tomato-1;
+money = money+70;
+setValue();
+}else if(tomato<=0){
+alert("Not Sufficient Tomatos");
+setValue();
+}
+}
+
+function wheatSell(){
+if(wheat>0){
+wheat = wheat-1;
+money = money+30;
+setValue();
+}else if(wheat<=0){
+alert("Not Sufficient Wheat");
+setValue();
+}
+}
+
+function riceSell(){
+if(rice>0){
+rice = rice-1;
+money = money+50;
+setValue();
+}else if(rice<=0){
+alert("Not Sufficient Rice");
+setValue();
+}
+}
+
+function appleSell(){
+if(apple>0){
+apple = apple-1;
+money = money+30;
+setValue();
+}else if(apple<=0){
+alert("Not Sufficient Apples");
+setValue();
+}
+}
+
+function bananaSell(){
+if(banana>0){
+banana = banana-1;
+money = money+20;
+setValue();
+}else if(banana<=0){
+alert("Not Sufficient Bananas");
+setValue();
+}
+}
+
+function eggSell(){
+if(eggs>0){
+eggs = eggs-1;
+money = money+5;
+setValue();
+}else if(eggs<=0){
+alert("Not Sufficient Eggs");
+setValue();
+}
+}
+
+function woolSell(){
+if(wool>0){
+wool = wool-1;
+money = money+20;
+setValue();
+}else if(wool<=0){
+alert("Not Sufficient Wool");
+setValue();
+}
+}
+
+function milkSell(){
+if(milk>0){
+milk = milk-1;
+money = money+20;
+setValue();
+}else if(milk<=0){
+alert("Not Sufficient Milk");
+setValue();
+}
+}
+</script>
+
+<script type="text/javascript">
+function buyOnionSeed(){
+if(money>49){
+money = money-50;
+onionSeed = onionSeed+1;
+setValue();
+}else if(money<=50){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+
+function buyOnion(){
+if(money>99){
+money = money-100;
+onion = onion+1;
+setValue();
+}else if(money<=100){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyTomatoSeed(){
+if(money>24){
+money = money-25;
+tomatoSeed = tomatoSeed+1;
+setValue();
+}else if(money<=25){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyTomato(){
+if(money>69){
+money = money-70;
+tomato = tomato+1;
+setValue();
+}else if(money<=70){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyWheatSeed(){
+if(money>9){
+money = money-10;
+wheatSeed = wheatSeed+1;
+setValue();
+}else if(money<=10){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyWheat(){
+if(money>29){
+money = money-30;
+wheat = wheat+1;
+setValue();
+}else if(money<=30){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyRiceSeed(){
+if(money>9){
+money = money-10;
+riceSeed = riceSeed+1;
+setValue();
+}else if(money<=10){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyRice(){
+if(money>9){
+money = money-10;
+rice = rice+1;
+setValue();
+}else if(money<=10){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyAppleSeed(){
+if(money>9){
+money = money-10;
+appleSeed = appleSeed+1;
+setValue();
+}else if(money<=20){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyApple(){
+if(money>29){
+money = money-30;
+apple = apple+1;
+setValue();
+}else if(money<=30){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyBananaSeed(){
+if(money>9){
+money = money-10;
+bananaSeed = bananaSeed+1;
+setValue();
+}else if(money<=10){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyBanana(){
+if(money>19){
+money = money-20;
+banana = banana+1;
+setValue();
+}else if(money<=20){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyEgg(){
+if(money>4){
+money = money-5;
+eggs = eggs+1;
+setValue();
+}else if(money<=5){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+
+function buyWool(){
+if(money>19){
+money = money-20;
+wool = wool+1;
+setValue();
+}else if(money<=20){
+alert("Not Sufficient Money");
+setValue();
+}
+}
+</script>
+
+<script type="text/javascript">
+
+function send100(){
+if(money>99){
+money=money-100;
+bankMoney=bankMoney+100;
+setValue();
+}else if(money<99){
+alert("No Money");
+setValue();
+}
+}
+
+function send1000(){
+if(money>999){
+money=money-1000;
+bankMoney=bankMoney+1000;
+setValue();
+}else if(money<999){
+alert("No Money");
+setValue();
+}
+}
+
+function send10000(){
+if(money>9999){
+money=money-10000;
+bankMoney=bankMoney+10000;
+setValue();
+}else if(money<9999){
+alert("No Money");
+setValue();
+}
+}
+
+function get100(){
+if(bankMoney>99){
+bankMoney=bankMoney-100;
+money=money+100;
+setValue();
+}else if(bankMoney<99){
+alert("No Money");
+setValue();
+}
+}
+
+function get1000(){
+if(bankMoney>999){
+bankMoney=bankMoney-1000;
+money=money+1000;
+setValue();
+}else if(bankMoney<999){
+alert("No Money");
+setValue();
+}
+}
+
+function get10000(){
+if(bankMoney>9999){
+bankMoney=bankMoney-10000;
+money=money+10000;
+setValue();
+}else if(bankMoney<9999){
+alert("No Money");
+setValue();
+}
+}
+var smallField = document.getElementById("smallFieldImg");
+var smallFieldSecond = document.getElementById("smallFieldSecond");
+</script>
+
+<script type="text/javascript">
+
+var smallFieldWheatSecond = 5;
+var smallFieldRiceSecond = 5;
+var smallFieldTomatoSecond = 5;
+var smallFieldOnionSecond = 5;
+
+
+function addWheatSmallField(){
+smallField.innerHTML = "°°°°°°°°°<br>°°°°°°°°°<br>°°°°°°°°°<br>°°°°°°°°°";
+//wheatSeed = wheatSeed-1;
+var smallFieldTime = setInterval(
+function(){
+if(smallFieldWheatSecond==0){
+smallFieldWheatSecond = 5;
+wheat = wheat+10;
+smallFieldSecond.innerText = null;
+smallField.innerText = null;
+setValue();
+clearInterval(smallFieldTime);
+}else{
+smallFieldSecond.innerText = smallFieldWheatSecond;
+smallFieldWheatSecond--;
+}
+},1000)
+}
+
+
+function addRiceSmallField(){
+smallField.innerHTML = "°°°°°°°°°<br>°°°°°°°°°<br>°°°°°°°°°<br>°°°°°°°°°";
+//wheatSeed = wheatSeed-1;
+var smallFieldTimeRice = setInterval(
+function(){
+if(smallFieldRiceSecond==0){
+smallFieldRiceSecond = 5;
+rice = rice+10;
+smallFieldSecond.innerText = null;
+smallField.innerText = null;
+setValue();
+clearInterval(smallFieldTimeRice);
+}else{
+smallFieldSecond.innerText = smallFieldRiceSecond;
+smallFieldRiceSecond--;
+}
+},1000)
+}
+
+
+function addTomatoSmallField(){
+smallField.innerHTML = "°°°°°°°°°<br>°°°°°°°°°<br>°°°°°°°°°<br>°°°°°°°°°";
+//wheatSeed = wheatSeed-1;
+var smallFieldTimeTomato = setInterval(
+function(){
+if(smallFieldTomatoSecond==0){
+smallFieldTomatoSecond = 5;
+tomato = tomato+10;
+smallFieldSecond.innerText = null;
+smallField.innerText = null;
+setValue();
+clearInterval(smallFieldTimeTomato);
+}else{
+smallFieldSecond.innerText = smallFieldTomatoSecond;
+smallFieldTomatoSecond--;
+}
+},1000)
+}
+
+
+function addOnionSmallField(){
+smallField.innerHTML = "°°°°°°°°°<br>°°°°°°°°°<br>°°°°°°°°°<br>°°°°°°°°°";
+//wheatSeed = wheatSeed-1;
+var smallFieldTimeOnion = setInterval(
+function(){
+if(smallFieldOnionSecond==0){
+smallFieldOnionSecond = 5;
+onion = onion+10;
+smallFieldSecond.innerText = null;
+smallField.innerText = null;
+setValue();
+clearInterval(smallFieldTimeOnion);
+}else{
+smallFieldSecond.innerText = smallFieldOnionSecond;
+smallFieldOnionSecond--;
+}
+},1000)
+}
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+function smallFieldWheat(){
+if (wheatSeed>0){
+//var smallField = document.getElementById("smallFieldImg");
+addWheatSmallField();
+wheatSeed--;
+setValue();
+}else if(wheatSeed<=1){
+alert("Not Sufficient Seeds");
+setValue();
+}
+}
+
+function smallFieldRice(){
+if (riceSeed>0){
+//var smallField = document.getElementById("smallFieldImg");
+addRiceSmallField();
+riceSeed--;
+setValue();
+}else if(riceSeed<=1){
+alert("Not Sufficient Seeds");
+setValue();
+}
+}
+
+
+function smallFieldOnion(){
+if (onionSeed>0){
+//var smallField = document.getElementById("smallFieldImg");
+addOnionSmallField();
+onionSeed--;
+setValue();
+}else if(onionSeed<=1){
+alert("Not Sufficient Seeds");
+setValue();
+}
+}
+
+function smallFieldTomato(){
+if (tomatoSeed>0){
+//var smallField = document.getElementById("smallFieldImg");
+addTomatoSmallField();
+tomatoSeed--;
+setValue();
+}else if(tomatoSeed<=1){
+alert("Not Sufficient Seeds");
+setValue();
+}
+}
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+This is a game made with jJavaScript and HTML.
+So your need a browser in your device to play it.
+Thanks for playing.
