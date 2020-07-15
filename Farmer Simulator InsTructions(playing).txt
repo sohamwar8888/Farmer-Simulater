@@ -1,0 +1,15 @@
+First you need to collect seeds.
+You have money in you bank.(with you also)
+grow seeds in the last box, that is your field.
+Till now you can grow only four crops.(you can grow  more in future updates)
+Press collect button on you first box to start collecting paricular things.(ex.Milk)
+dont press collect button double time(it glitches(it will be fixed in future)).
+sell your crops and other materials.
+Thanks for playing  :)
+
+                             ~              ~       
+                          |  0             0 |
+                          |          {         |
+                          |                    |
+                          |          O        |
+                          ______________
